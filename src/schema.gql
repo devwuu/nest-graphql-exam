@@ -1,0 +1,91 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Survey {
+  id: Int!
+  title: String!
+  desc: String!
+}
+
+type Answer {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type UserAnswer {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Question {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Query {
+  survey(id: Int!): Survey!
+  question(id: Int!): Question!
+  answer(id: Int!): Answer!
+  userAnswer(id: Int!): UserAnswer!
+}
+
+type Mutation {
+  createSurvey(createSurveyInput: CreateSurveyInput!): Survey!
+  updateSurvey(updateSurveyInput: UpdateSurveyInput!): Survey!
+  removeSurvey(id: Int!): Survey!
+  createQuestion(createQuestionInput: CreateQuestionInput!): Question!
+  updateQuestion(updateQuestionInput: UpdateQuestionInput!): Question!
+  removeQuestion(id: Int!): Question!
+  createAnswer(createAnswerInput: CreateAnswerInput!): Answer!
+  updateAnswer(updateAnswerInput: UpdateAnswerInput!): Answer!
+  removeAnswer(id: Int!): Answer!
+  createUserAnswer(createUserAnswerInput: CreateUserAnswerInput!): UserAnswer!
+  updateUserAnswer(updateUserAnswerInput: UpdateUserAnswerInput!): UserAnswer!
+  removeUserAnswer(id: Int!): UserAnswer!
+}
+
+input CreateSurveyInput {
+  id: Int!
+  title: String!
+  desc: String!
+}
+
+input UpdateSurveyInput {
+  id: Int!
+  title: String
+  desc: String
+}
+
+input CreateQuestionInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateQuestionInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateAnswerInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateAnswerInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateUserAnswerInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateUserAnswerInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
