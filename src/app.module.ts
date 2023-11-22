@@ -15,6 +15,8 @@ import { Question } from './question/entities/question.entity';
 import { Answer } from './answer/entities/answer.entity';
 import { UserAnswer } from './user-answer/entities/user-answer.entity';
 import { join } from 'path';
+import { HttpExceptionFilter } from './common/exception-filter/http-exception.filter';
+import { APP_FILTER } from '@nestjs/core';
 
 const typeOrmOptions: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
@@ -50,6 +52,12 @@ const typeOrmOptions: TypeOrmModuleAsyncOptions = {
     CommonModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+    AppService,
+  ],
 })
 export class AppModule {}

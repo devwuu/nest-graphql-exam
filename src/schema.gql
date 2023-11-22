@@ -24,6 +24,7 @@ type Question {
 }
 
 type Query {
+  surveys: [Survey!]!
   survey(id: Int!): Survey!
   question(id: Int!): Question!
   answer(id: Int!): Answer!
@@ -46,15 +47,14 @@ type Mutation {
 }
 
 input CreateSurveyInput {
-  id: Int!
   title: String!
-  desc: String!
+  desc: String
 }
 
 input UpdateSurveyInput {
-  id: Int!
-  title: String
+  title: String!
   desc: String
+  id: Int!
 }
 
 input CreateQuestionInput {

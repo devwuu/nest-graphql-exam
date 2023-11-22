@@ -1,11 +1,12 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { IsNotEmpty, IsString } from 'class-validator';
+import { CommonEntity } from '../../common/entity/CommonEntity';
 
 @ObjectType()
 @Entity()
-export class Survey {
-  @Field(() => Int, { nullable: false })
+export class Survey extends CommonEntity {
+  @Field(() => Int)
   @PrimaryGeneratedColumn()
   id: number;
 

@@ -15,7 +15,7 @@ export class SurveyResolver {
     return this.surveyService.create(createSurveyInput);
   }
 
-  @Query(() => [Survey], { name: 'survey' })
+  @Query(() => [Survey], { name: 'surveys' })
   findAll() {
     return this.surveyService.findAll();
   }

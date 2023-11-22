@@ -1,27 +1,16 @@
-import {
-  ArgumentsHost,
-  Catch,
-  ExceptionFilter,
-  HttpException,
-  Logger,
-} from '@nestjs/common';
+import { ArgumentsHost, Catch, HttpException, Logger } from '@nestjs/common';
 
-import { Request, Response } from 'express';
+import { GqlArgumentsHost, GqlExceptionFilter } from '@nestjs/graphql';
 
 @Catch(HttpException)
-export class HttpExceptionFilter implements ExceptionFilter {
+export class HttpExceptionFilter implements GqlExceptionFilter {
   private readonly logger = new Logger(HttpExceptionFilter.name);
-  catch(exception: any, host: ArgumentsHost): any {
-    const ctx = host.switchToHttp();
-    const request = ctx.getRequest<Request>();
-    const response = ctx.getResponse<Response>();
-    const status = exception.getStatus();
 
-    response.status(status).json({
-      status,
-      path: request.url,
-      message: exception.message,
-      desc: exception.getResponse().message,
-    });
+  // todo reponse custom 확인
+  // https://docs.nestjs.com/graphql/other-features#exception-filters
+  catch(exception: HttpException, host: ArgumentsHost) {
+    // const gqlHost = GqlArgumentsHost.create(host);
+    this.logger.error(exception.stack);
+    return exception;
   }
 }

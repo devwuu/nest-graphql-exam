@@ -12,12 +12,14 @@ export class SurveyService {
     private readonly surveyRepository: Repository<Survey>,
   ) {}
 
-  create(createSurveyInput: CreateSurveyInput) {
-    return 'This action adds a new survey';
+  async create(createSurveyInput: CreateSurveyInput) {
+    const saved = await this.surveyRepository.save(createSurveyInput);
+    return saved;
   }
 
-  findAll() {
-    return `This action returns all survey`;
+  async findAll() {
+    const surveys = await this.surveyRepository.find();
+    return surveys;
   }
 
   async findById(id: number) {
@@ -26,11 +28,20 @@ export class SurveyService {
     return survey;
   }
 
-  update(id: number, updateSurveyInput: UpdateSurveyInput) {
-    return `This action updates a #${id} survey`;
+  async update(id: number, updateSurveyInput: UpdateSurveyInput) {
+    const find = await this.surveyRepository.findOneBy({ id });
+    if (!find) throw new NotFoundException('Not exist survey id');
+    await this.surveyRepository.update(id, {
+      ...find,
+      ...updateSurveyInput,
+    });
+    return { ...find, ...updateSurveyInput };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} survey`;
+  async remove(id: number) {
+    const find = await this.surveyRepository.findOneBy({ id });
+    if (!find) throw new NotFoundException('Not exist survey id');
+    await this.surveyRepository.softDelete(id);
+    return { id };
   }
 }

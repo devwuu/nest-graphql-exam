@@ -1,16 +1,14 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsString } from 'class-validator';
+import { InputType, Field } from '@nestjs/graphql';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 @InputType()
 export class CreateSurveyInput {
-  @Field(() => Int, { nullable: false })
-  id: number;
-
-  @Field(() => String)
+  @Field({ nullable: false })
   @IsString()
+  @IsNotEmpty()
   title: string;
 
-  @Field(() => String)
+  @Field({ nullable: true })
   @IsString()
   desc: string;
 }

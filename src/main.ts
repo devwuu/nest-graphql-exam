@@ -6,7 +6,6 @@ import {
   Logger,
   ValidationPipe,
 } from '@nestjs/common';
-import { HttpExceptionFilter } from './common/exception-filter/http-exception.filter';
 
 class Application {
   private readonly app: INestApplication;
@@ -16,7 +15,6 @@ class Application {
   }
 
   private addMiddleware() {
-    this.app.useGlobalFilters(new HttpExceptionFilter());
     this.app.useGlobalPipes(new ValidationPipe({ transform: true }));
     this.app.useGlobalInterceptors(
       new ClassSerializerInterceptor(this.app.get(Reflector)),
