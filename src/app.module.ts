@@ -8,15 +8,15 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { SurveyModule } from './survey/survey.module';
 import { AnswerModule } from './answer/answer.module';
-import { UserAnswerModule } from './user-answer/user-answer.module';
 import { QuestionModule } from './question/question.module';
 import { Survey } from './survey/entities/survey.entity';
 import { Question } from './question/entities/question.entity';
 import { Answer } from './answer/entities/answer.entity';
-import { UserAnswer } from './user-answer/entities/user-answer.entity';
 import { join } from 'path';
 import { HttpExceptionFilter } from './common/exception-filter/http-exception.filter';
 import { APP_FILTER } from '@nestjs/core';
+import { OptionModule } from './option/option.module';
+import { Option } from './option/entities/option.entity';
 
 const typeOrmOptions: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
@@ -27,7 +27,7 @@ const typeOrmOptions: TypeOrmModuleAsyncOptions = {
     username: configService.get('POSTGRES_USER'),
     password: configService.get('POSTGRES_PASSWORD'),
     database: configService.get('POSTGRES_DB'),
-    entities: [Answer, Question, Survey, UserAnswer],
+    entities: [Answer, Question, Survey, Option],
     synchronize: true, // // shouldn't be used in production
     logging: true,
   }),
@@ -48,8 +48,8 @@ const typeOrmOptions: TypeOrmModuleAsyncOptions = {
     SurveyModule,
     QuestionModule,
     AnswerModule,
-    UserAnswerModule,
     CommonModule,
+    OptionModule,
   ],
   controllers: [AppController],
   providers: [

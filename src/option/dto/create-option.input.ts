@@ -2,7 +2,7 @@ import { InputType, Field } from '@nestjs/graphql';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 @InputType()
-export class CreateQuestionInput {
+export class CreateOptionInput {
   @Field()
   @IsString()
   @IsNotEmpty()
@@ -16,5 +16,10 @@ export class CreateQuestionInput {
   @Field()
   @IsNumber()
   @IsNotEmpty()
-  surveyId: number;
+  score: number;
+
+  @Field()
+  @IsNumber()
+  @IsNotEmpty()
+  questionId: number;
 }

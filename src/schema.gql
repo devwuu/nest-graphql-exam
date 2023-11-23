@@ -13,15 +13,17 @@ type Answer {
   exampleField: Int!
 }
 
-type UserAnswer {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
 type Question {
   id: Int!
   title: String!
   order: Float!
+}
+
+type Option {
+  id: Int!
+  title: String!
+  order: Float!
+  score: Float!
 }
 
 type Query {
@@ -29,7 +31,7 @@ type Query {
   survey(id: Int!): Survey!
   question(id: Int!): Question!
   answer(id: Int!): Answer!
-  userAnswer(id: Int!): UserAnswer!
+  option(id: Int!): Option!
 }
 
 type Mutation {
@@ -42,9 +44,9 @@ type Mutation {
   createAnswer(createAnswerInput: CreateAnswerInput!): Answer!
   updateAnswer(updateAnswerInput: UpdateAnswerInput!): Answer!
   removeAnswer(id: Int!): Answer!
-  createUserAnswer(createUserAnswerInput: CreateUserAnswerInput!): UserAnswer!
-  updateUserAnswer(updateUserAnswerInput: UpdateUserAnswerInput!): UserAnswer!
-  removeUserAnswer(id: Int!): UserAnswer!
+  createOption(createOptionInput: CreateOptionInput!): Option!
+  updateOption(updateOptionInput: UpdateOptionInput!): Option!
+  removeOption(id: Int!): Option!
 }
 
 input CreateSurveyInput {
@@ -53,9 +55,9 @@ input CreateSurveyInput {
 }
 
 input UpdateSurveyInput {
+  id: Int!
   title: String
   desc: String
-  id: Int!
 }
 
 input CreateQuestionInput {
@@ -65,10 +67,9 @@ input CreateQuestionInput {
 }
 
 input UpdateQuestionInput {
+  id: Int!
   title: String
   order: Float
-  surveyId: Float
-  id: Int!
 }
 
 input CreateAnswerInput {
@@ -82,13 +83,16 @@ input UpdateAnswerInput {
   id: Int!
 }
 
-input CreateUserAnswerInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+input CreateOptionInput {
+  title: String!
+  order: Float!
+  score: Float!
+  questionId: Float!
 }
 
-input UpdateUserAnswerInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+input UpdateOptionInput {
   id: Int!
+  title: String
+  order: Float
+  score: Float
 }
