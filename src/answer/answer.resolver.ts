@@ -15,6 +15,14 @@ export class AnswerResolver {
     return this.answerService.create(createAnswerInput);
   }
 
+  @Mutation(() => [Answer])
+  createAnswers(
+    @Args({ name: 'createAnswerInputs', type: () => [CreateAnswerInput] })
+    createAnswerInputs: CreateAnswerInput[],
+  ) {
+    return this.answerService.createAll(createAnswerInputs);
+  }
+
   @Query(() => Answer, { name: 'answer' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.answerService.findById(id);

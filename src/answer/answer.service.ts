@@ -29,6 +29,15 @@ export class AnswerService {
     return answer;
   }
 
+  async createAll(createAnswerInputs: CreateAnswerInput[]) {
+    const answers = [];
+    for (const input of createAnswerInputs) {
+      const answer = await this.create(input);
+      answers.push(answer);
+    }
+    return answers;
+  }
+
   async findById(id: number) {
     const answer = await this.answerRepository.findOneBy({ id });
     if (!answer) throw new NotFoundException('Not exist answer id');
