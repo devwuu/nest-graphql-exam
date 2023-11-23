@@ -8,6 +8,6 @@ import { QuestionModule } from '../question/question.module';
 @Module({
   imports: [TypeOrmModule.forFeature([Option]), QuestionModule],
   providers: [OptionResolver, OptionService],
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule, OptionService],
 })
 export class OptionModule {}

@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateOptionInput } from './dto/create-option.input';
 import { UpdateOptionInput } from './dto/update-option.input';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -8,6 +8,8 @@ import { Question } from '../question/entities/question.entity';
 
 @Injectable()
 export class OptionService {
+  private readonly logger = new Logger(OptionService.name);
+
   constructor(
     @InjectRepository(Option)
     private readonly optionRepository: Repository<Option>,
@@ -45,5 +47,14 @@ export class OptionService {
     if (!option) throw new NotFoundException('Not exist option id');
     await this.optionRepository.softDelete(id);
     return { id };
+  }
+
+  async findOptionsByQuestionId(id: number) {
+    const options = await this.optionRepository
+      .createQueryBuilder('o')
+      .leftJoin('o.question', 'q')
+      .where('q.id = :id', { id })
+      .getMany();
+    return options;
   }
 }

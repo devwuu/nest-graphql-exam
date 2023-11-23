@@ -1,6 +1,12 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { CommonEntity } from '../../common/entity/CommonEntity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Question } from '../../question/entities/question.entity';
 import { IsNumber, IsString } from 'class-validator';
 
@@ -30,6 +36,7 @@ export class Option extends CommonEntity {
   @ManyToOne(() => Question, (question) => question.id, {
     onDelete: 'SET NULL',
   })
+  @JoinColumn({ name: 'questionId', referencedColumnName: 'id' })
   question: Question;
 
   // todo survey id 추가 여부 검토
