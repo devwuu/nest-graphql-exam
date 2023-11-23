@@ -15,11 +15,6 @@ export class OptionResolver {
     return this.optionService.create(createOptionInput);
   }
 
-  // @Query(() => [Option], { name: 'option' })
-  // findAll() {
-  //   return this.optionService.findAll();
-  // }
-
   @Query(() => Option, { name: 'option' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.optionService.findById(id);

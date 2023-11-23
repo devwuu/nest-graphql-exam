@@ -9,22 +9,21 @@ export class AnswerResolver {
   constructor(private readonly answerService: AnswerService) {}
 
   @Mutation(() => Answer)
-  createAnswer(@Args('createAnswerInput') createAnswerInput: CreateAnswerInput) {
+  createAnswer(
+    @Args('createAnswerInput') createAnswerInput: CreateAnswerInput,
+  ) {
     return this.answerService.create(createAnswerInput);
-  }
-
-  @Query(() => [Answer], { name: 'answer' })
-  findAll() {
-    return this.answerService.findAll();
   }
 
   @Query(() => Answer, { name: 'answer' })
   findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.answerService.findOne(id);
+    return this.answerService.findById(id);
   }
 
   @Mutation(() => Answer)
-  updateAnswer(@Args('updateAnswerInput') updateAnswerInput: UpdateAnswerInput) {
+  updateAnswer(
+    @Args('updateAnswerInput') updateAnswerInput: UpdateAnswerInput,
+  ) {
     return this.answerService.update(updateAnswerInput.id, updateAnswerInput);
   }
 

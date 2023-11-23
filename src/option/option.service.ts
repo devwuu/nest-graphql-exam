@@ -5,7 +5,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Option } from './entities/option.entity';
 import { Question } from '../question/entities/question.entity';
-import * as process from 'process';
 
 @Injectable()
 export class OptionService {
@@ -27,10 +26,6 @@ export class OptionService {
     });
     return option;
   }
-
-  // findAll() {
-  //   return `This action returns all option`;
-  // }
 
   async findById(id: number) {
     const option = await this.optionRepository.findOneBy({ id });

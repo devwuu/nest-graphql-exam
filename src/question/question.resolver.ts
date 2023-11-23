@@ -15,11 +15,6 @@ export class QuestionResolver {
     return this.questionService.create(createQuestionInput);
   }
 
-  // @Query(() => [Question], { name: 'question' })
-  // findAll() {
-  //   return this.questionService.findAll();
-  // }
-
   @Query(() => Question, { name: 'question' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.questionService.findById(id);

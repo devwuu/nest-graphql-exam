@@ -8,11 +8,6 @@ type Survey {
   desc: String!
 }
 
-type Answer {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
 type Question {
   id: Int!
   title: String!
@@ -24,6 +19,10 @@ type Option {
   title: String!
   order: Float!
   score: Float!
+}
+
+type Answer {
+  id: Int!
 }
 
 type Query {
@@ -73,14 +72,15 @@ input UpdateQuestionInput {
 }
 
 input CreateAnswerInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  surveyId: Int!
+  questionId: Int!
+  optionId: Int!
+  userId: Float!
 }
 
 input UpdateAnswerInput {
-  """Example field (placeholder)"""
-  exampleField: Int
   id: Int!
+  optionId: Int!
 }
 
 input CreateOptionInput {
