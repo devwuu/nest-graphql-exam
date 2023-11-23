@@ -19,8 +19,9 @@ type UserAnswer {
 }
 
 type Question {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: Int!
+  title: String!
+  order: Float!
 }
 
 type Query {
@@ -52,19 +53,21 @@ input CreateSurveyInput {
 }
 
 input UpdateSurveyInput {
-  title: String!
+  title: String
   desc: String
   id: Int!
 }
 
 input CreateQuestionInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  title: String!
+  order: Float!
+  surveyId: Float!
 }
 
 input UpdateQuestionInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  title: String
+  order: Float
+  surveyId: Float
   id: Int!
 }
 

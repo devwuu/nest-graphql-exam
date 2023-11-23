@@ -9,9 +9,8 @@ export class UpdateSurveyInput extends PartialType(CreateSurveyInput) {
   @IsInt()
   id: number;
 
-  @Field({ nullable: false })
+  @Field({ nullable: true })
   @IsString()
-  @IsNotEmpty()
   title: string;
 
   @Field({ nullable: true })
