@@ -18,13 +18,17 @@ export class OptionService {
   ) {}
 
   async create(createOptionInput: CreateOptionInput) {
-    const question = await this.questionRepository.findOneBy({
-      id: createOptionInput.questionId,
-    });
+    const question = await this.questionRepository
+      .createQueryBuilder('q')
+      .leftJoinAndSelect('q.survey', 's')
+      .where('q.id = :id', { id: createOptionInput.questionId })
+      .getOne();
+
     if (!question) throw new NotFoundException('Not exist question id');
     const option = await this.optionRepository.save({
       ...createOptionInput,
       question,
+      survey: question.survey.id,
     });
     return option;
   }
@@ -46,6 +50,16 @@ export class OptionService {
     const option = await this.optionRepository.findOneBy({ id });
     if (!option) throw new NotFoundException('Not exist option id');
     await this.optionRepository.softDelete(id);
+    return { id };
+  }
+
+  async removeBySurveyId(id: number) {
+    await this.optionRepository.softDelete({ survey: id });
+    return { id };
+  }
+
+  async removeByQuestionId(id: number) {
+    await this.optionRepository.softDelete({ question: { id } });
     return { id };
   }
 }

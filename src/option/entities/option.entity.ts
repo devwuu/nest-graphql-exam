@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { Question } from '../../question/entities/question.entity';
 import { IsNumber, IsString } from 'class-validator';
+import { Survey } from '../../survey/entities/survey.entity';
 
 @ObjectType()
 @Entity()
@@ -39,5 +40,7 @@ export class Option extends CommonEntity {
   @JoinColumn({ name: 'questionId', referencedColumnName: 'id' })
   question: Question;
 
-  // todo survey id 추가 여부 검토
+  @Column({ name: 'surveyId' })
+  @IsNumber()
+  survey: number;
 }

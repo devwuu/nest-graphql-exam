@@ -47,6 +47,10 @@ export class AnswerService {
   async update(id: number, updateAnswerInput: UpdateAnswerInput) {
     const answer = await this.answerRepository.findOneBy({ id });
     if (!answer) throw new NotFoundException('Not exist answer id');
+
+    // 단순히 option의 유무만 판단하기 때문에 option과 question-survey 간의 정합성이 떨어질 가능성이 있음
+    // querybuilder를 이용해 join으로 조회하면 해결할 수 있을 것으로 예상하나 id가 틀어질 경우의 수가 얼마나 있을지 고민해볼 필요가 있음
+
     const option = await this.optionRepository.findOneBy({
       id: updateAnswerInput.optionId,
     });
