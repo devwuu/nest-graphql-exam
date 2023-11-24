@@ -9,10 +9,10 @@ import { OptionModule } from '../option/option.module';
 @Module({
   imports: [
     TypeOrmModule.forFeature([Question]),
-    SurveyModule,
+    forwardRef(() => SurveyModule),
     forwardRef(() => OptionModule),
   ],
   providers: [QuestionResolver, QuestionService],
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule, QuestionService],
 })
 export class QuestionModule {}

@@ -2,10 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Survey {
+type Option {
   id: Int!
   title: String!
-  desc: String!
+  order: Float!
+  score: Float!
 }
 
 type Question {
@@ -15,11 +16,11 @@ type Question {
   options: [Option!]!
 }
 
-type Option {
+type Survey {
   id: Int!
   title: String!
-  order: Float!
-  score: Float!
+  desc: String!
+  questions: [Question!]!
 }
 
 type Answer {

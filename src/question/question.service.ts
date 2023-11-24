@@ -27,10 +27,6 @@ export class QuestionService {
     return question;
   }
 
-  // findAll() {
-  //   return `This action returns all question`;
-  // }
-
   async findById(id: number) {
     const question = await this.questionRepository.findOneBy({ id });
     if (!question) throw new NotFoundException('Not exist question id');
@@ -52,5 +48,14 @@ export class QuestionService {
     if (!question) throw new NotFoundException('Not exist question id');
     await this.questionRepository.softDelete(id);
     return { id };
+  }
+
+  async findQuestionsBySurveyId(id: number) {
+    const questions = await this.questionRepository
+      .createQueryBuilder('q')
+      .leftJoin('q.survey', 's')
+      .where('s.id = :id', { id })
+      .getMany();
+    return questions;
   }
 }

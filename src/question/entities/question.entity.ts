@@ -1,5 +1,11 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { Survey } from '../../survey/entities/survey.entity';
 import { CommonEntity } from '../../common/entity/CommonEntity';
@@ -27,6 +33,7 @@ export class Question extends CommonEntity {
   @ManyToOne(() => Survey, (survey) => survey.id, {
     onDelete: 'SET NULL',
   })
+  @JoinColumn({ name: 'surveyId', referencedColumnName: 'id' })
   survey: Survey;
 
   @Field(() => [Option])

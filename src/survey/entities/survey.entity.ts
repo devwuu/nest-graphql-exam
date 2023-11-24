@@ -2,6 +2,7 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { IsNotEmpty, IsString } from 'class-validator';
 import { CommonEntity } from '../../common/entity/CommonEntity';
+import { Question } from '../../question/entities/question.entity';
 
 @ObjectType()
 @Entity()
@@ -22,4 +23,7 @@ export class Survey extends CommonEntity {
   @Column()
   @IsString()
   desc: string;
+
+  @Field(() => [Question])
+  questions: Question[];
 }
