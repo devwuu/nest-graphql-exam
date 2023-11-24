@@ -39,6 +39,7 @@ export class Option extends CommonEntity {
   @JoinColumn({ name: 'questionId', referencedColumnName: 'id' })
   question: Question;
 
+  // 조회를 조금 더 용이하게 하기 위함
   @Column({ name: 'surveyId' })
   @IsNumber()
   survey: number;

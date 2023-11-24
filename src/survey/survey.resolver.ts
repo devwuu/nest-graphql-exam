@@ -13,9 +13,13 @@ import { CreateSurveyInput } from './dto/create-survey.input';
 import { UpdateSurveyInput } from './dto/update-survey.input';
 import { Question } from '../question/entities/question.entity';
 import { QuestionLoader } from '../question/question.loader';
+import { Answer } from '../answer/entities/answer.entity';
+import { Logger } from '@nestjs/common';
 
 @Resolver(() => Survey)
 export class SurveyResolver {
+  private readonly logger = new Logger(SurveyResolver.name);
+
   constructor(
     private readonly surveyService: SurveyService,
     private readonly questionLoader: QuestionLoader,
@@ -60,4 +64,11 @@ export class SurveyResolver {
   findQuestionsBySurveyId(@Parent() survey: Survey) {
     return this.questionLoader.findQuestionsBySurveyId.load(survey.id);
   }
+
+  // // query(조회)의 경우 name 필수 지정
+  // @ResolveField(() => [Question], { name: 'questionss' })
+  // findQuestionsBySurveyIdWithAnswer(@Parent() answer: Answer) {
+  //   this.logger.debug(answer);
+  //   return this.questionLoader.findQuestionsBySurveyId.load(answer.surveyId);
+  // }
 }

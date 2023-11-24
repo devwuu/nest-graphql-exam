@@ -11,6 +11,6 @@ import { QuestionModule } from '../question/question.module';
     forwardRef(() => QuestionModule),
   ],
   providers: [SurveyResolver, SurveyService],
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule, SurveyService],
 })
 export class SurveyModule {}

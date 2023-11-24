@@ -22,8 +22,8 @@ export class AnswerService {
     if (!option) throw new NotFoundException('Not exist option id');
     const answer = await this.answerRepository.save({
       user: createAnswerInput.userId,
-      survey: createAnswerInput.surveyId,
-      question: createAnswerInput.questionId,
+      surveyId: createAnswerInput.surveyId,
+      questionId: createAnswerInput.questionId,
       option,
     });
     return answer;

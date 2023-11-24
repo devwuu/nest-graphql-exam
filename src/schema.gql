@@ -25,6 +25,8 @@ type Survey {
 
 type Answer {
   id: Int!
+  survey: Survey!
+  question: Question!
 }
 
 type Query {
