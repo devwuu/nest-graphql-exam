@@ -5,6 +5,7 @@ import { IsNumber } from 'class-validator';
 import { Option } from '../../option/entities/option.entity';
 import { Survey } from '../../survey/entities/survey.entity';
 import { Question } from '../../question/entities/question.entity';
+import { AnsweredSurvey } from '../answered-survey.dto';
 
 @ObjectType()
 @Entity()
@@ -31,9 +32,9 @@ export class Answer extends CommonEntity {
   @ManyToOne(() => Option, (option) => option.id)
   option: Option;
 
-  @Field(() => Survey)
-  survey: Survey;
+  @Field(() => AnsweredSurvey)
+  survey: AnsweredSurvey;
 
-  @Field(() => Question)
-  question: Question;
+  // @Field(() => Question)
+  // question: Question;
 }

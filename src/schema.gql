@@ -23,10 +23,22 @@ type Survey {
   questions: [Question!]!
 }
 
+type AnsweredQuestion {
+  id: Int!
+  title: String!
+  order: Float!
+}
+
+type AnsweredSurvey {
+  id: Int!
+  title: String!
+  desc: String!
+  questions: [AnsweredQuestion!]!
+}
+
 type Answer {
   id: Int!
-  survey: Survey!
-  question: Question!
+  survey: AnsweredSurvey!
 }
 
 type Query {

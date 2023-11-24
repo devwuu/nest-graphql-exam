@@ -17,6 +17,9 @@ import { SurveyService } from '../survey/survey.service';
 import { OptionLoader } from '../option/option.loader';
 import { QuestionLoader } from '../question/question.loader';
 import { QuestionService } from '../question/question.service';
+import { AnsweredSurvey } from './answered-survey.dto';
+import { AnsweredQuestion } from './answered-question.dto';
+import { Logger } from '@nestjs/common';
 
 @Resolver(() => Answer)
 export class AnswerResolver {
@@ -63,13 +66,18 @@ export class AnswerResolver {
     return this.answerService.remove(id);
   }
 
-  @ResolveField(() => Survey, { name: 'survey' })
+  @ResolveField(() => AnsweredSurvey, { name: 'survey' })
   findSurvey(@Parent() answer: Answer) {
     return this.surveyService.findById(answer.surveyId);
   }
+}
 
-  @ResolveField(() => Question, { name: 'question' })
-  findQuestion(@Parent() answer: Answer) {
-    return this.questionService.findById(answer.questionId);
+@Resolver(() => AnsweredSurvey)
+export class AnsweredSurveyResolver {
+  private readonly logger = new Logger(AnsweredSurveyResolver.name);
+  constructor(private readonly questionService: QuestionService) {}
+  @ResolveField(() => [AnsweredQuestion], { name: 'questions' })
+  findSurvey(@Parent() answeredSurvey: AnsweredSurvey) {
+    return this.questionService.findQuestionsWithSurveyId(answeredSurvey.id);
   }
 }

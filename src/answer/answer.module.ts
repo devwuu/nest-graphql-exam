@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AnswerService } from './answer.service';
-import { AnswerResolver } from './answer.resolver';
+import { AnsweredSurveyResolver, AnswerResolver } from './answer.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Answer } from './entities/answer.entity';
 import { OptionModule } from '../option/option.module';
@@ -15,7 +15,7 @@ import { QuestionModule } from '../question/question.module';
     QuestionModule,
     OptionModule,
   ],
-  providers: [AnswerResolver, AnswerService],
+  providers: [AnswerResolver, AnswerService, AnsweredSurveyResolver],
   exports: [TypeOrmModule],
 })
 export class AnswerModule {}

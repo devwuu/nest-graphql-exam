@@ -6,6 +6,7 @@ import { Question } from './entities/question.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Survey } from '../survey/entities/survey.entity';
 import { OptionService } from '../option/option.service';
+import { Answer } from '../answer/entities/answer.entity';
 
 @Injectable()
 export class QuestionService {
@@ -57,5 +58,15 @@ export class QuestionService {
     await this.questionRepository.softDelete({ survey: { id } });
     await this.optionService.removeBySurveyId(id); // question 하위의 options 삭제
     return { id };
+  }
+
+  async findQuestionsWithSurveyId(id: number) {
+    const questions = await this.questionRepository
+      .createQueryBuilder('q')
+      .leftJoinAndSelect(Answer, 'a', 'a.questionId = q.id')
+      .where('a.surveyId = :id', { id })
+      .getMany();
+
+    return questions;
   }
 }
