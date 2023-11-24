@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Question } from './entities/question.entity';
 import { SurveyModule } from '../survey/survey.module';
 import { OptionModule } from '../option/option.module';
+import { QuestionLoader } from './question.loader';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import { OptionModule } from '../option/option.module';
     forwardRef(() => SurveyModule),
     forwardRef(() => OptionModule),
   ],
-  providers: [QuestionResolver, QuestionService],
-  exports: [TypeOrmModule, QuestionService],
+  providers: [QuestionResolver, QuestionService, QuestionLoader],
+  exports: [TypeOrmModule, QuestionService, QuestionLoader],
 })
 export class QuestionModule {}

@@ -13,12 +13,13 @@ import { CreateSurveyInput } from './dto/create-survey.input';
 import { UpdateSurveyInput } from './dto/update-survey.input';
 import { Question } from '../question/entities/question.entity';
 import { QuestionService } from '../question/question.service';
+import { QuestionLoader } from '../question/question.loader';
 
 @Resolver(() => Survey)
 export class SurveyResolver {
   constructor(
     private readonly surveyService: SurveyService,
-    private readonly questionService: QuestionService,
+    private readonly questionLoader: QuestionLoader,
   ) {}
 
   @Mutation(() => Survey)
@@ -53,6 +54,6 @@ export class SurveyResolver {
   // query(조회)의 경우 name 필수 지정
   @ResolveField(() => [Question], { name: 'questions' })
   findQuestionsBySurveyId(@Parent() survey: Survey) {
-    return this.questionService.findQuestionsBySurveyId(survey.id);
+    return this.questionLoader.findQuestionsBySurveyId.load(survey.id);
   }
 }

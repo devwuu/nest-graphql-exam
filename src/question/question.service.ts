@@ -49,13 +49,4 @@ export class QuestionService {
     await this.questionRepository.softDelete(id);
     return { id };
   }
-
-  async findQuestionsBySurveyId(id: number) {
-    const questions = await this.questionRepository
-      .createQueryBuilder('q')
-      .leftJoin('q.survey', 's')
-      .where('s.id = :id', { id })
-      .getMany();
-    return questions;
-  }
 }

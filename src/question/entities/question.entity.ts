@@ -36,6 +36,6 @@ export class Question extends CommonEntity {
   @JoinColumn({ name: 'surveyId', referencedColumnName: 'id' })
   survey: Survey;
 
-  @Field(() => [Option])
+  @Field(() => [Option], { nullable: true })
   options: Option[];
 }

@@ -48,13 +48,4 @@ export class OptionService {
     await this.optionRepository.softDelete(id);
     return { id };
   }
-
-  async findOptionsByQuestionId(id: number) {
-    const options = await this.optionRepository
-      .createQueryBuilder('o')
-      .leftJoin('o.question', 'q')
-      .where('q.id = :id', { id })
-      .getMany();
-    return options;
-  }
 }
