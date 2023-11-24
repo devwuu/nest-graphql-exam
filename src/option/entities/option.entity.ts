@@ -9,7 +9,6 @@ import {
 } from 'typeorm';
 import { Question } from '../../question/entities/question.entity';
 import { IsNumber, IsString } from 'class-validator';
-import { Survey } from '../../survey/entities/survey.entity';
 
 @ObjectType()
 @Entity()

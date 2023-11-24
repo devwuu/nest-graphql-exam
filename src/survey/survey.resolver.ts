@@ -12,7 +12,6 @@ import { Survey } from './entities/survey.entity';
 import { CreateSurveyInput } from './dto/create-survey.input';
 import { UpdateSurveyInput } from './dto/update-survey.input';
 import { Question } from '../question/entities/question.entity';
-import { QuestionService } from '../question/question.service';
 import { QuestionLoader } from '../question/question.loader';
 
 @Resolver(() => Survey)
@@ -22,6 +21,7 @@ export class SurveyResolver {
     private readonly questionLoader: QuestionLoader,
   ) {}
 
+  // 설문지 C
   @Mutation(() => Survey)
   createSurvey(
     @Args('createSurveyInput') createSurveyInput: CreateSurveyInput,
@@ -29,16 +29,19 @@ export class SurveyResolver {
     return this.surveyService.create(createSurveyInput);
   }
 
+  // 설문지 R
   @Query(() => [Survey], { name: 'surveys' })
   findAll() {
     return this.surveyService.findAll();
   }
 
+  // 설문지 R
   @Query(() => Survey, { name: 'survey' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.surveyService.findById(id);
   }
 
+  // 설문지 U
   @Mutation(() => Survey)
   updateSurvey(
     @Args('updateSurveyInput') updateSurveyInput: UpdateSurveyInput,
@@ -46,6 +49,7 @@ export class SurveyResolver {
     return this.surveyService.update(updateSurveyInput.id, updateSurveyInput);
   }
 
+  // 설문지 D
   @Mutation(() => Survey)
   removeSurvey(@Args('id', { type: () => Int }) id: number) {
     return this.surveyService.remove(id);

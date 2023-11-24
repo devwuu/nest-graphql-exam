@@ -4,7 +4,6 @@ import { UpdateSurveyInput } from './dto/update-survey.input';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Survey } from './entities/survey.entity';
 import { Repository } from 'typeorm';
-import { Question } from '../question/entities/question.entity';
 import { QuestionService } from '../question/question.service';
 
 @Injectable()

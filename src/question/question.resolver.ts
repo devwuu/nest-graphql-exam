@@ -21,6 +21,7 @@ export class QuestionResolver {
     private readonly optionLoader: OptionLoader,
   ) {}
 
+  // 문항 C
   @Mutation(() => Question)
   createQuestion(
     @Args('createQuestionInput') createQuestionInput: CreateQuestionInput,
@@ -28,11 +29,13 @@ export class QuestionResolver {
     return this.questionService.create(createQuestionInput);
   }
 
+  // 문항 R
   @Query(() => Question, { name: 'question' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.questionService.findById(id);
   }
 
+  // 문항 U
   @Mutation(() => Question)
   updateQuestion(
     @Args('updateQuestionInput') updateQuestionInput: UpdateQuestionInput,
@@ -43,6 +46,7 @@ export class QuestionResolver {
     );
   }
 
+  // 문항 D
   @Mutation(() => Question)
   removeQuestion(@Args('id', { type: () => Int }) id: number) {
     return this.questionService.remove(id);

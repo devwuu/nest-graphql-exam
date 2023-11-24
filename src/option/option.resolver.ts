@@ -8,6 +8,7 @@ import { UpdateOptionInput } from './dto/update-option.input';
 export class OptionResolver {
   constructor(private readonly optionService: OptionService) {}
 
+  // 선택지 C
   @Mutation(() => Option)
   createOption(
     @Args('createOptionInput') createOptionInput: CreateOptionInput,
@@ -15,11 +16,13 @@ export class OptionResolver {
     return this.optionService.create(createOptionInput);
   }
 
+  // 선택지 R
   @Query(() => Option, { name: 'option' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.optionService.findById(id);
   }
 
+  // 선택지 U
   @Mutation(() => Option)
   updateOption(
     @Args('updateOptionInput') updateOptionInput: UpdateOptionInput,
@@ -27,6 +30,7 @@ export class OptionResolver {
     return this.optionService.update(updateOptionInput.id, updateOptionInput);
   }
 
+  // 선택지 D
   @Mutation(() => Option)
   removeOption(@Args('id', { type: () => Int }) id: number) {
     return this.optionService.remove(id);
