@@ -17,16 +17,16 @@ import { SurveyService } from '../survey/survey.service';
 import { OptionLoader } from '../option/option.loader';
 import { QuestionLoader } from '../question/question.loader';
 import { QuestionService } from '../question/question.service';
-import { AnsweredSurvey } from './answered-survey.dto';
-import { AnsweredQuestion } from './answered-question.dto';
+import { AnsweredSurvey } from './dto/answered-survey.field';
+import { AnsweredQuestion } from './dto/answered-question.field';
 import { Logger } from '@nestjs/common';
+import { AnsweredOption } from './dto/answered-option.field';
 
 @Resolver(() => Answer)
 export class AnswerResolver {
   constructor(
     private readonly answerService: AnswerService,
     private readonly surveyService: SurveyService,
-    private readonly questionService: QuestionService,
   ) {}
 
   // 답변 C
@@ -72,12 +72,27 @@ export class AnswerResolver {
   }
 }
 
+// 완료 설문지 조회
 @Resolver(() => AnsweredSurvey)
 export class AnsweredSurveyResolver {
-  private readonly logger = new Logger(AnsweredSurveyResolver.name);
   constructor(private readonly questionService: QuestionService) {}
   @ResolveField(() => [AnsweredQuestion], { name: 'questions' })
-  findSurvey(@Parent() answeredSurvey: AnsweredSurvey) {
-    return this.questionService.findQuestionsWithSurveyId(answeredSurvey.id);
+  async findSurvey(@Parent() answeredSurvey: AnsweredSurvey) {
+    const result = await this.questionService.findQuestionsBySurveyId(
+      answeredSurvey.id,
+    );
+    return result;
+  }
+}
+
+// 완료 설문지 조회
+@Resolver(() => AnsweredQuestion)
+export class AnsweredQuestionResolver {
+  constructor(private readonly optionLoader: OptionLoader) {}
+  @ResolveField(() => [AnsweredOption], { name: 'options' })
+  findSurvey(@Parent() answeredQuestion: AnsweredQuestion) {
+    return this.optionLoader.findSelectedOptionsByQuestionId.load(
+      answeredQuestion.id,
+    );
   }
 }

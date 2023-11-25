@@ -60,7 +60,8 @@ export class QuestionService {
     return { id };
   }
 
-  async findQuestionsWithSurveyId(id: number) {
+  // todo 쿼리 검토 필요
+  async findQuestionsBySurveyId(id: number) {
     const questions = await this.questionRepository
       .createQueryBuilder('q')
       .leftJoinAndSelect(Answer, 'a', 'a.questionId = q.id')

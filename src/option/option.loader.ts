@@ -3,6 +3,7 @@ import * as DataLoader from 'dataloader';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Option } from './entities/option.entity';
+import { Answer } from '../answer/entities/answer.entity';
 
 @Injectable({ scope: Scope.REQUEST })
 export class OptionLoader {
@@ -22,4 +23,20 @@ export class OptionLoader {
       options.filter((option) => option.question.id === qId),
     );
   });
+
+  // todo 쿼리 검토 필요
+  findSelectedOptionsByQuestionId = new DataLoader(
+    async (questionIds: number[]) => {
+      const options = await this.optionRepository
+        .createQueryBuilder('o')
+        .innerJoinAndSelect(Answer, 'a', 'a.optionId = o.id')
+        .innerJoinAndSelect('o.question', 'q')
+        .where('o.questionId in (:...questionIds)', { questionIds })
+        .getMany();
+
+      return questionIds.map((qId) =>
+        options.filter((option) => option.question.id === qId),
+      );
+    },
+  );
 }

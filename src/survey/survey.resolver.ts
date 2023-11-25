@@ -64,11 +64,4 @@ export class SurveyResolver {
   findQuestionsBySurveyId(@Parent() survey: Survey) {
     return this.questionLoader.findQuestionsBySurveyId.load(survey.id);
   }
-
-  // // query(조회)의 경우 name 필수 지정
-  // @ResolveField(() => [Question], { name: 'questionss' })
-  // findQuestionsBySurveyIdWithAnswer(@Parent() answer: Answer) {
-  //   this.logger.debug(answer);
-  //   return this.questionLoader.findQuestionsBySurveyId.load(answer.surveyId);
-  // }
 }

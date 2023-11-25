@@ -1,7 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-
-import { IsNotEmpty, IsString } from 'class-validator';
-import { AnsweredQuestion } from './answered-question.dto';
+import { AnsweredQuestion } from './answered-question.field';
 
 @ObjectType()
 export class AnsweredSurvey {
@@ -9,14 +7,14 @@ export class AnsweredSurvey {
   id: number;
 
   @Field(() => String)
-  @IsString()
-  @IsNotEmpty()
+  // @IsString()
+  // @IsNotEmpty()
   title: string;
 
   @Field(() => String)
-  @IsString()
+  // @IsString()
   desc: string;
 
-  @Field(() => [AnsweredQuestion])
+  @Field(() => [AnsweredQuestion], { nullable: true })
   questions: AnsweredQuestion[];
 }
