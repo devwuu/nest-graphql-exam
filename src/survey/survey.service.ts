@@ -34,10 +34,9 @@ export class SurveyService {
     const find = await this.surveyRepository.findOneBy({ id });
     if (!find) throw new NotFoundException('Not exist survey id');
     await this.surveyRepository.update(id, {
-      ...find,
       ...updateSurveyInput,
     });
-    return { ...find, ...updateSurveyInput };
+    return { id };
   }
 
   async remove(id: number) {

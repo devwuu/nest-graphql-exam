@@ -42,8 +42,10 @@ export class OptionService {
   async update(id: number, updateOptionInput: UpdateOptionInput) {
     const option = await this.optionRepository.findOneBy({ id });
     if (!option) throw new NotFoundException('Not exist option');
-    await this.optionRepository.update(id, { ...option, ...updateOptionInput });
-    return { ...option, ...updateOptionInput };
+    await this.optionRepository.update(id, {
+      ...updateOptionInput,
+    });
+    return { id };
   }
 
   async remove(id: number) {

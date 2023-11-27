@@ -1,25 +1,21 @@
 import {
-  Resolver,
-  Query,
-  Mutation,
   Args,
   Int,
-  ResolveField,
+  Mutation,
   Parent,
+  Query,
+  ResolveField,
+  Resolver,
 } from '@nestjs/graphql';
 import { AnswerService } from './answer.service';
 import { Answer } from './entities/answer.entity';
 import { CreateAnswerInput } from './dto/create-answer.input';
 import { UpdateAnswerInput } from './dto/update-answer.input';
-import { Question } from '../question/entities/question.entity';
-import { Survey } from '../survey/entities/survey.entity';
 import { SurveyService } from '../survey/survey.service';
 import { OptionLoader } from '../option/option.loader';
-import { QuestionLoader } from '../question/question.loader';
 import { QuestionService } from '../question/question.service';
 import { AnsweredSurvey } from './dto/answered-survey.field';
 import { AnsweredQuestion } from './dto/answered-question.field';
-import { Logger } from '@nestjs/common';
 import { AnsweredOption } from './dto/answered-option.field';
 
 @Resolver(() => Answer)
@@ -77,11 +73,8 @@ export class AnswerResolver {
 export class AnsweredSurveyResolver {
   constructor(private readonly questionService: QuestionService) {}
   @ResolveField(() => [AnsweredQuestion], { name: 'questions' })
-  async findSurvey(@Parent() answeredSurvey: AnsweredSurvey) {
-    const result = await this.questionService.findQuestionsBySurveyId(
-      answeredSurvey.id,
-    );
-    return result;
+  findSurvey(@Parent() answeredSurvey: AnsweredSurvey) {
+    return this.questionService.findQuestionsBySurveyId(answeredSurvey.id);
   }
 }
 

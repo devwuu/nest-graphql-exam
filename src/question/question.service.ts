@@ -40,10 +40,9 @@ export class QuestionService {
     const question = await this.questionRepository.findOneBy({ id });
     if (!question) throw new NotFoundException('Not exist question id');
     await this.questionRepository.update(id, {
-      ...question,
       ...updateQuestionInput,
     });
-    return { ...question, ...updateQuestionInput };
+    return { id };
   }
 
   async remove(id: number) {
