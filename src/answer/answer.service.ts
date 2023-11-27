@@ -56,8 +56,8 @@ export class AnswerService {
       id: updateAnswerInput.optionId,
     });
     if (!option) throw new NotFoundException('Not exist option id');
-    await this.answerRepository.update(id, { ...answer, option });
-    return { ...answer, optionId: option.id };
+    await this.answerRepository.update(id, { option });
+    return { id };
   }
 
   async remove(id: number) {
