@@ -6,7 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 import { Survey } from '../../survey/entities/survey.entity';
 import { CommonEntity } from '../../common/entity/CommonEntity';
 import { Option } from '../../option/entities/option.entity';
@@ -18,16 +18,14 @@ export class Question extends CommonEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field()
-  @Column()
+  @Field({ nullable: true })
+  @Column({ nullable: true })
   @IsString()
-  @IsNotEmpty()
   title: string;
 
-  @Field()
-  @Column()
+  @Field({ nullable: true })
+  @Column({ nullable: true })
   @IsNumber()
-  @IsNotEmpty()
   order: number;
 
   @ManyToOne(() => Survey, (survey) => survey.id, {

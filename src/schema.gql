@@ -4,43 +4,43 @@
 
 type Option {
   id: Int!
-  title: String!
-  order: Float!
-  score: Float!
+  title: String
+  order: Float
+  score: Float
 }
 
 type Question {
   id: Int!
-  title: String!
-  order: Float!
+  title: String
+  order: Float
   options: [Option!]!
 }
 
 type Survey {
   id: Int!
-  title: String!
-  desc: String!
+  title: String
+  desc: String
   questions: [Question!]!
 }
 
 type AnsweredOption {
   id: Int!
-  title: String!
-  order: Float!
-  score: Float!
+  title: String
+  order: Float
+  score: Float
 }
 
 type AnsweredQuestion {
   id: Int!
-  title: String!
-  order: Float!
+  title: String
+  order: Float
   options: [AnsweredOption!]!
 }
 
 type AnsweredSurvey {
   id: Int!
-  title: String!
-  desc: String!
+  title: String
+  desc: String
   questions: [AnsweredQuestion!]!
 }
 

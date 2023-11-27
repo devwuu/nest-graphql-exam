@@ -6,10 +6,10 @@ export class AnsweredQuestion {
   @Field(() => Int)
   id: number;
 
-  @Field()
+  @Field({ nullable: true })
   title: string;
 
-  @Field()
+  @Field({ nullable: true })
   order: number;
 
   @Field(() => [AnsweredOption], { nullable: true })

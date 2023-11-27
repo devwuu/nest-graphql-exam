@@ -28,7 +28,7 @@ export class OptionService {
     const option = await this.optionRepository.save({
       ...createOptionInput,
       question,
-      survey: question.survey.id,
+      surveyId: question.survey.id,
     });
     return option;
   }
@@ -56,7 +56,7 @@ export class OptionService {
   }
 
   async removeBySurveyId(id: number) {
-    await this.optionRepository.softDelete({ survey: id });
+    await this.optionRepository.softDelete({ surveyId: id });
     return { id };
   }
 

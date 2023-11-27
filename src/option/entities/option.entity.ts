@@ -18,18 +18,18 @@ export class Option extends CommonEntity {
   @IsNumber()
   id: number;
 
-  @Field()
-  @Column()
+  @Field({ nullable: true })
+  @Column({ nullable: true })
   @IsString()
   title: string;
 
-  @Field()
-  @Column()
+  @Field({ nullable: true })
+  @Column({ nullable: true })
   @IsNumber()
   order: number;
 
-  @Field()
-  @Column()
+  @Field({ nullable: true })
+  @Column({ nullable: true })
   @IsNumber()
   score: number;
 
@@ -40,7 +40,7 @@ export class Option extends CommonEntity {
   question: Question;
 
   // 조회를 조금 더 용이하게 하기 위함
-  @Column({ name: 'surveyId' })
+  @Column({ name: 'surveyId', nullable: true })
   @IsNumber()
-  survey: number;
+  surveyId: number;
 }

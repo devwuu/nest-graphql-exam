@@ -5,6 +5,7 @@ import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 export class UpdateQuestionInput {
   @Field(() => Int)
   @IsNotEmpty()
+  @IsNumber()
   id: number;
 
   @Field({ nullable: true })
@@ -13,6 +14,5 @@ export class UpdateQuestionInput {
 
   @Field({ nullable: true })
   @IsNumber()
-  @IsNotEmpty()
   order: number;
 }

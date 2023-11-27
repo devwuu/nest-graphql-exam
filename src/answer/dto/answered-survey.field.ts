@@ -6,13 +6,10 @@ export class AnsweredSurvey {
   @Field(() => Int)
   id: number;
 
-  @Field(() => String)
-  // @IsString()
-  // @IsNotEmpty()
+  @Field(() => String, { nullable: true })
   title: string;
 
-  @Field(() => String)
-  // @IsString()
+  @Field(() => String, { nullable: true })
   desc: string;
 
   @Field(() => [AnsweredQuestion], { nullable: true })

@@ -5,12 +5,12 @@ export class AnsweredOption {
   @Field(() => Int)
   id: number;
 
-  @Field()
+  @Field({ nullable: true })
   title: string;
 
-  @Field()
+  @Field({ nullable: true })
   order: number;
 
-  @Field()
+  @Field({ nullable: true })
   score: number;
 }

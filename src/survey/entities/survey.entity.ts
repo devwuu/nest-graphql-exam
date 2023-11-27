@@ -11,19 +11,17 @@ export class Survey extends CommonEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field(() => String)
-  @Column({
-    nullable: false,
-  })
+  @Field(() => String, { nullable: true })
+  @Column({ nullable: true })
   @IsString()
   @IsNotEmpty()
   title: string;
 
-  @Field(() => String)
-  @Column()
+  @Field(() => String, { nullable: true })
+  @Column({ nullable: true })
   @IsString()
   desc: string;
 
-  @Field(() => [Question])
+  @Field(() => [Question], { nullable: true })
   questions: Question[];
 }
