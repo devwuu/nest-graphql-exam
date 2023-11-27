@@ -23,6 +23,10 @@ type Survey {
   questions: [Question!]!
 }
 
+type Answer {
+  id: Int!
+}
+
 type AnsweredOption {
   id: Int!
   title: String
@@ -44,12 +48,6 @@ type AnsweredSurvey {
   title: String
   desc: String
   questions: [AnsweredQuestion!]!
-}
-
-type Answer {
-  id: Int!
-  surveyId: Float
-  survey: AnsweredSurvey
 }
 
 type Query {
