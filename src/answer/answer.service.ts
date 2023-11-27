@@ -5,8 +5,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Answer } from './entities/answer.entity';
 import { Repository } from 'typeorm';
 import { Option } from '../option/entities/option.entity';
-import { Question } from '../question/entities/question.entity';
-import { Survey } from '../survey/entities/survey.entity';
 
 @Injectable()
 export class AnswerService {
