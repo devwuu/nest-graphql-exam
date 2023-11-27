@@ -22,7 +22,7 @@ export class AnswerService {
     });
     if (!option) throw new NotFoundException('Not exist option id');
     const answer = await this.answerRepository.save({
-      user: createAnswerInput.userId,
+      userId: createAnswerInput.userId,
       surveyId: createAnswerInput.surveyId,
       questionId: createAnswerInput.questionId,
       option,
