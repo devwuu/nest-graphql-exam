@@ -67,6 +67,8 @@ export class QuestionService {
       .andWhere('a.userId = :userId', { userId })
       .getMany();
 
+    if (!questions) throw new NotFoundException('Answer is not exist');
+
     return questions.map((question) => {
       return { ...question, userId };
     });

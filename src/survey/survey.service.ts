@@ -56,6 +56,8 @@ export class SurveyService {
       .andWhere('a.surveyId = :surveyId', { surveyId })
       .getOne();
 
+    if (!survey) throw new NotFoundException('Answer is not exist');
+
     return { ...survey, userId };
   }
 }

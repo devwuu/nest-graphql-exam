@@ -1,4 +1,4 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { Injectable, NotFoundException, Scope } from '@nestjs/common';
 import * as DataLoader from 'dataloader';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -37,6 +37,8 @@ export class OptionLoader {
         .where('o.questionId in (:...questionIds)', { questionIds })
         .andWhere('a.userId = :userId', { userId: questions[0]?.userId })
         .getMany();
+
+      if (!options) throw new NotFoundException('Answer is not exist');
 
       return questions.map((question) =>
         options.filter((option) => option.question.id === question.id),
