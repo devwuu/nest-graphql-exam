@@ -17,7 +17,6 @@ import { HttpExceptionFilter } from './common/exception-filter/http-exception.fi
 import { APP_FILTER } from '@nestjs/core';
 import { OptionModule } from './option/option.module';
 import { Option } from './option/entities/option.entity';
-import { errorContext } from 'rxjs/internal/util/errorContext';
 
 const typeOrmOptions: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
