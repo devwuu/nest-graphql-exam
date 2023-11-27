@@ -32,6 +32,7 @@ type AnsweredOption {
 
 type AnsweredQuestion {
   id: Int!
+  userId: Int!
   title: String
   order: Float
   options: [AnsweredOption!]!
@@ -39,6 +40,7 @@ type AnsweredQuestion {
 
 type AnsweredSurvey {
   id: Int!
+  userId: Int!
   title: String
   desc: String
   questions: [AnsweredQuestion!]!
@@ -46,7 +48,8 @@ type AnsweredSurvey {
 
 type Answer {
   id: Int!
-  survey: AnsweredSurvey!
+  surveyId: Float
+  survey: AnsweredSurvey
 }
 
 type Query {
@@ -55,6 +58,7 @@ type Query {
   question(id: Int!): Question!
   option(id: Int!): Option!
   answer(id: Int!): Answer!
+  complete(surveyId: Int!, userId: Int!): AnsweredSurvey!
 }
 
 type Mutation {

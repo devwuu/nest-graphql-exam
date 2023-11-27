@@ -6,6 +6,9 @@ export class AnsweredQuestion {
   @Field(() => Int)
   id: number;
 
+  @Field(() => Int)
+  userId: number;
+
   @Field({ nullable: true })
   title: string;
 

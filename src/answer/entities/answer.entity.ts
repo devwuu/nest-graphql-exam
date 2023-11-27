@@ -21,6 +21,7 @@ export class Answer extends CommonEntity {
   // 조회를 조금 더 용이하게 하기 위함
   @Column({ nullable: true })
   @IsNumber()
+  @Field({ nullable: true })
   surveyId: number;
 
   // 조회를 조금 더 용이하게 하기 위함

@@ -20,10 +20,7 @@ import { AnsweredOption } from './dto/answered-option.field';
 
 @Resolver(() => Answer)
 export class AnswerResolver {
-  constructor(
-    private readonly answerService: AnswerService,
-    private readonly surveyService: SurveyService,
-  ) {}
+  constructor(private readonly answerService: AnswerService) {}
 
   // 답변 C
   @Mutation(() => Answer)
@@ -61,20 +58,31 @@ export class AnswerResolver {
   removeAnswer(@Args('id', { type: () => Int }) id: number) {
     return this.answerService.remove(id);
   }
-
-  @ResolveField(() => AnsweredSurvey, { name: 'survey' })
-  findSurvey(@Parent() answer: Answer) {
-    return this.surveyService.findById(answer.surveyId);
-  }
 }
 
 // 완료 설문지 조회
 @Resolver(() => AnsweredSurvey)
 export class AnsweredSurveyResolver {
-  constructor(private readonly questionService: QuestionService) {}
+  constructor(
+    private readonly questionService: QuestionService,
+    private readonly surveyService: SurveyService,
+  ) {}
+
+  // 완료 설문지 R
+  @Query(() => AnsweredSurvey, { name: 'complete' })
+  findBySurveyIdAndUserId(
+    @Args('surveyId', { type: () => Int }) surveyId: number,
+    @Args('userId', { type: () => Int }) userId: number,
+  ) {
+    return this.surveyService.findByIdWithAnswer(surveyId, userId);
+  }
+
   @ResolveField(() => [AnsweredQuestion], { name: 'questions' })
   findSurvey(@Parent() answeredSurvey: AnsweredSurvey) {
-    return this.questionService.findQuestionsBySurveyId(answeredSurvey.id);
+    return this.questionService.findQuestionsBySurveyId(
+      answeredSurvey.id,
+      answeredSurvey.userId,
+    );
   }
 }
 
@@ -85,7 +93,7 @@ export class AnsweredQuestionResolver {
   @ResolveField(() => [AnsweredOption], { name: 'options' })
   findSurvey(@Parent() answeredQuestion: AnsweredQuestion) {
     return this.optionLoader.findSelectedOptionsByQuestionId.load(
-      answeredQuestion.id,
+      answeredQuestion,
     );
   }
 }

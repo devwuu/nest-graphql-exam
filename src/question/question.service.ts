@@ -59,14 +59,16 @@ export class QuestionService {
     return { id };
   }
 
-  // todo 쿼리 검토 필요
-  async findQuestionsBySurveyId(id: number) {
+  async findQuestionsBySurveyId(surveyId: number, userId: number) {
     const questions = await this.questionRepository
       .createQueryBuilder('q')
       .leftJoinAndSelect(Answer, 'a', 'a.questionId = q.id')
-      .where('a.surveyId = :id', { id })
+      .where('a.surveyId = :surveyId', { surveyId })
+      .andWhere('a.userId = :userId', { userId })
       .getMany();
 
-    return questions;
+    return questions.map((question) => {
+      return { ...question, userId };
+    });
   }
 }

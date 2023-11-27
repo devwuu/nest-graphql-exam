@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Survey } from './entities/survey.entity';
 import { Repository } from 'typeorm';
 import { QuestionService } from '../question/question.service';
+import { Answer } from '../answer/entities/answer.entity';
 
 @Injectable()
 export class SurveyService {
@@ -45,5 +46,16 @@ export class SurveyService {
     await this.surveyRepository.softDelete(id);
     await this.questionService.removeBySurveyId(id); // survey 하위의 quetions 삭제
     return { id };
+  }
+
+  async findByIdWithAnswer(surveyId: number, userId: number) {
+    const survey = await this.surveyRepository
+      .createQueryBuilder('s')
+      .innerJoinAndSelect(Answer, 'a', 'a.surveyId = s.id')
+      .where('a.userId = :userId', { userId })
+      .andWhere('a.surveyId = :surveyId', { surveyId })
+      .getOne();
+
+    return { ...survey, userId };
   }
 }
