@@ -3,7 +3,7 @@ version: '3.1'
 
 services:
   db:
-    container_name: maumlab-db
+    container_name: graphql-pgsql
     image: postgres
     restart: always
     ports:
