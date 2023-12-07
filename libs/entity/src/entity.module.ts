@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { EntityService } from './entity.service';
 import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Answer } from '@app/entity/answer/answer.entity';
@@ -35,13 +34,7 @@ const typeOrmOptions: TypeOrmModuleAsyncOptions = {
     OptionModule,
     AnswerModule,
   ],
-  providers: [EntityService],
-  exports: [
-    EntityService,
-    SurveyModule,
-    QuestionModule,
-    OptionModule,
-    AnswerModule,
-  ],
+  providers: [],
+  exports: [SurveyModule, QuestionModule, OptionModule, AnswerModule],
 })
 export class EntityModule {}

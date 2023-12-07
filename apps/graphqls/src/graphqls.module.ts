@@ -8,10 +8,9 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { SurveyModule } from './survey/survey.module';
 import { QuestionModule } from './question/question.module';
 import { AnswerModule } from './answer/answer.module';
-import { CommonModule } from './common/common.module';
 import { OptionModule } from './option/option.module';
 import { APP_FILTER } from '@nestjs/core';
-import { HttpExceptionFilter } from './common/exception-filter/http-exception.filter';
+import { HttpExceptionFilter } from '@app/shared/exception-filter/http-exception.filter';
 
 @Module({
   imports: [
@@ -32,7 +31,6 @@ import { HttpExceptionFilter } from './common/exception-filter/http-exception.fi
     SurveyModule,
     QuestionModule,
     AnswerModule,
-    CommonModule,
     OptionModule,
   ],
   controllers: [GraphqlsController],
