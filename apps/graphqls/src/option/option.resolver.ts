@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { OptionService } from './option.service';
-import { Option } from './entities/option.entity';
+import { Option } from '@app/entity/option/option.entity';
 import { CreateOptionInput } from './dto/create-option.input';
 import { UpdateOptionInput } from './dto/update-option.input';
 

@@ -2,8 +2,8 @@ import { Injectable, NotFoundException, Scope } from '@nestjs/common';
 import * as DataLoader from 'dataloader';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Option } from './entities/option.entity';
-import { Answer } from '../answer/entities/answer.entity';
+import { Option } from '@app/entity/option/option.entity';
+import { Answer } from '@app/entity/answer/answer.entity';
 import { AnsweredQuestion } from '../answer/dto/answered-question.field';
 
 @Injectable({ scope: Scope.REQUEST })

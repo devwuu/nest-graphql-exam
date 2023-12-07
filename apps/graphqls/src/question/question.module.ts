@@ -1,19 +1,12 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { QuestionService } from './question.service';
 import { QuestionResolver } from './question.resolver';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Question } from './entities/question.entity';
-import { SurveyModule } from '../survey/survey.module';
-import { OptionModule } from '../option/option.module';
-import { QuestionLoader } from './question.loader';
+import { EntityModule } from '@app/entity';
+import { OptionLoader } from './option.loader';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Question]),
-    forwardRef(() => SurveyModule),
-    forwardRef(() => OptionModule),
-  ],
-  providers: [QuestionResolver, QuestionService, QuestionLoader],
-  exports: [TypeOrmModule, QuestionService, QuestionLoader],
+  imports: [EntityModule],
+  providers: [QuestionResolver, QuestionService, OptionLoader],
+  exports: [QuestionService, OptionLoader],
 })
 export class QuestionModule {}

@@ -1,16 +1,12 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { SurveyService } from './survey.service';
 import { SurveyResolver } from './survey.resolver';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Survey } from './entities/survey.entity';
-import { QuestionModule } from '../question/question.module';
+import { EntityModule } from '@app/entity';
+import { QuestionLoader } from './question.loader';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Survey]),
-    forwardRef(() => QuestionModule),
-  ],
-  providers: [SurveyResolver, SurveyService],
-  exports: [TypeOrmModule, SurveyService],
+  imports: [EntityModule],
+  providers: [SurveyResolver, SurveyService, QuestionLoader],
+  exports: [SurveyService],
 })
 export class SurveyModule {}

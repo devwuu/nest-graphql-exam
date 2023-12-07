@@ -2,17 +2,16 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateSurveyInput } from './dto/create-survey.input';
 import { UpdateSurveyInput } from './dto/update-survey.input';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Survey } from './entities/survey.entity';
 import { Repository } from 'typeorm';
-import { QuestionService } from '../question/question.service';
-import { Answer } from '../answer/entities/answer.entity';
+import { Answer } from '@app/entity/answer/answer.entity';
+import { Survey } from '@app/entity/survey/survey.entity';
 
 @Injectable()
 export class SurveyService {
   constructor(
     @InjectRepository(Survey)
     private readonly surveyRepository: Repository<Survey>,
-    private readonly questionService: QuestionService,
+    // private readonly questionService: QuestionService,
   ) {}
 
   async create(createSurveyInput: CreateSurveyInput) {
@@ -44,7 +43,7 @@ export class SurveyService {
     const find = await this.surveyRepository.findOneBy({ id });
     if (!find) throw new NotFoundException('Not exist survey id');
     await this.surveyRepository.softDelete(id);
-    await this.questionService.removeBySurveyId(id); // survey 하위의 quetions 삭제
+    // await this.questionService.removeBySurveyId(id); // survey 하위의 quetions 삭제
     return { id };
   }
 

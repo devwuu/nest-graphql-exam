@@ -8,13 +8,12 @@ import {
   Parent,
 } from '@nestjs/graphql';
 import { SurveyService } from './survey.service';
-import { Survey } from './entities/survey.entity';
 import { CreateSurveyInput } from './dto/create-survey.input';
 import { UpdateSurveyInput } from './dto/update-survey.input';
-import { Question } from '../question/entities/question.entity';
-import { QuestionLoader } from '../question/question.loader';
-import { Answer } from '../answer/entities/answer.entity';
+import { QuestionLoader } from './question.loader';
 import { Logger } from '@nestjs/common';
+import { Survey } from '@app/entity/survey/survey.entity';
+import { Question } from '@app/entity/question/question.entity';
 
 @Resolver(() => Survey)
 export class SurveyResolver {

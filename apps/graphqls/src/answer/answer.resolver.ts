@@ -8,11 +8,11 @@ import {
   Resolver,
 } from '@nestjs/graphql';
 import { AnswerService } from './answer.service';
-import { Answer } from './entities/answer.entity';
+import { Answer } from '@app/entity/answer/answer.entity';
 import { CreateAnswerInput } from './dto/create-answer.input';
 import { UpdateAnswerInput } from './dto/update-answer.input';
 import { SurveyService } from '../survey/survey.service';
-import { OptionLoader } from '../option/option.loader';
+import { OptionLoader } from '../question/option.loader';
 import { QuestionService } from '../question/question.service';
 import { AnsweredSurvey } from './dto/answered-survey.field';
 import { AnsweredQuestion } from './dto/answered-question.field';

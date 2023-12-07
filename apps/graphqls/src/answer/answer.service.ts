@@ -2,9 +2,9 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAnswerInput } from './dto/create-answer.input';
 import { UpdateAnswerInput } from './dto/update-answer.input';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Answer } from './entities/answer.entity';
+import { Answer } from '@app/entity/answer/answer.entity';
 import { Repository } from 'typeorm';
-import { Option } from '../option/entities/option.entity';
+import { Option } from '@app/entity/option/option.entity';
 
 @Injectable()
 export class AnswerService {

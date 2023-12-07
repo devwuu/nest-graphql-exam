@@ -54,9 +54,9 @@ type Query {
   surveys: [Survey!]!
   survey(id: Int!): Survey!
   question(id: Int!): Question!
-  option(id: Int!): Option!
   answer(id: Int!): Answer!
   complete(surveyId: Int!, userId: Int!): AnsweredSurvey!
+  option(id: Int!): Option!
 }
 
 type Mutation {
@@ -66,13 +66,13 @@ type Mutation {
   createQuestion(createQuestionInput: CreateQuestionInput!): Question!
   updateQuestion(updateQuestionInput: UpdateQuestionInput!): Question!
   removeQuestion(id: Int!): Question!
-  createOption(createOptionInput: CreateOptionInput!): Option!
-  updateOption(updateOptionInput: UpdateOptionInput!): Option!
-  removeOption(id: Int!): Option!
   createAnswer(createAnswerInput: CreateAnswerInput!): Answer!
   createAnswers(createAnswerInputs: [CreateAnswerInput!]!): [Answer!]!
   updateAnswer(updateAnswerInput: UpdateAnswerInput!): Answer!
   removeAnswer(id: Int!): Answer!
+  createOption(createOptionInput: CreateOptionInput!): Option!
+  updateOption(updateOptionInput: UpdateOptionInput!): Option!
+  removeOption(id: Int!): Option!
 }
 
 input CreateSurveyInput {
@@ -98,6 +98,18 @@ input UpdateQuestionInput {
   order: Float
 }
 
+input CreateAnswerInput {
+  surveyId: Int!
+  questionId: Int!
+  optionId: Int!
+  userId: Float!
+}
+
+input UpdateAnswerInput {
+  id: Int!
+  optionId: Int!
+}
+
 input CreateOptionInput {
   title: String!
   order: Float!
@@ -110,16 +122,4 @@ input UpdateOptionInput {
   title: String
   order: Float
   score: Float
-}
-
-input CreateAnswerInput {
-  surveyId: Int!
-  questionId: Int!
-  optionId: Int!
-  userId: Float!
-}
-
-input UpdateAnswerInput {
-  id: Int!
-  optionId: Int!
 }

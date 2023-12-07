@@ -3,8 +3,8 @@ import { CreateOptionInput } from './dto/create-option.input';
 import { UpdateOptionInput } from './dto/update-option.input';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Option } from './entities/option.entity';
-import { Question } from '../question/entities/question.entity';
+import { Option } from '@app/entity/option/option.entity';
+import { Question } from '@app/entity/question/question.entity';
 
 @Injectable()
 export class OptionService {

@@ -1,5 +1,5 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { CommonEntity } from '../../common/entity/CommonEntity';
+import { CommonEntity } from '../common.entity';
 import {
   Column,
   Entity,
@@ -7,8 +7,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Question } from '../../question/entities/question.entity';
 import { IsNumber, IsString } from 'class-validator';
+import { Question } from '@app/entity/question/question.entity';
 
 @ObjectType()
 @Entity()

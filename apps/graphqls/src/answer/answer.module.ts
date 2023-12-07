@@ -5,25 +5,17 @@ import {
   AnsweredSurveyResolver,
   AnswerResolver,
 } from './answer.resolver';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Answer } from './entities/answer.entity';
-import { OptionModule } from '../option/option.module';
+import { EntityModule } from '@app/entity';
 import { SurveyModule } from '../survey/survey.module';
 import { QuestionModule } from '../question/question.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Answer]),
-    SurveyModule,
-    QuestionModule,
-    OptionModule,
-  ],
+  imports: [EntityModule, SurveyModule, QuestionModule],
   providers: [
     AnswerResolver,
     AnswerService,
     AnsweredSurveyResolver,
     AnsweredQuestionResolver,
   ],
-  exports: [TypeOrmModule],
 })
 export class AnswerModule {}

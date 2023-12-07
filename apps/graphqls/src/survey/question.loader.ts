@@ -1,8 +1,8 @@
 import * as DataLoader from 'dataloader';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Question } from './entities/question.entity';
 import { Repository } from 'typeorm';
 import { Injectable, Scope } from '@nestjs/common';
+import { Question } from '@app/entity/question/question.entity';
 
 @Injectable({ scope: Scope.REQUEST })
 export class QuestionLoader {

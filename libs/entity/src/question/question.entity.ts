@@ -7,9 +7,9 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { IsNumber, IsString } from 'class-validator';
-import { Survey } from '../../survey/entities/survey.entity';
-import { CommonEntity } from '../../common/entity/CommonEntity';
-import { Option } from '../../option/entities/option.entity';
+import { CommonEntity } from '@app/entity/common.entity';
+import { Survey } from '@app/entity/survey/survey.entity';
+import { Option } from '@app/entity/option/option.entity';
 
 @ObjectType()
 @Entity()

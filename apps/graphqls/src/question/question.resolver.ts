@@ -8,11 +8,11 @@ import {
   Parent,
 } from '@nestjs/graphql';
 import { QuestionService } from './question.service';
-import { Question } from './entities/question.entity';
 import { CreateQuestionInput } from './dto/create-question.input';
 import { UpdateQuestionInput } from './dto/update-question.input';
-import { Option } from '../option/entities/option.entity';
-import { OptionLoader } from '../option/option.loader';
+import { Option } from '@app/entity/option/option.entity';
+import { OptionLoader } from './option.loader';
+import { Question } from '@app/entity/question/question.entity';
 
 @Resolver(() => Question)
 export class QuestionResolver {

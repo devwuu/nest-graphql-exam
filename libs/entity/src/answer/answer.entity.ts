@@ -1,8 +1,8 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { CommonEntity } from '../../common/entity/CommonEntity';
+import { CommonEntity } from '../common.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { IsNumber } from 'class-validator';
-import { Option } from '../../option/entities/option.entity';
+import { Option } from '@app/entity/option/option.entity';
 
 @ObjectType()
 @Entity()
