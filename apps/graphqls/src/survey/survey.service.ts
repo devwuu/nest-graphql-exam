@@ -5,13 +5,18 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Answer } from '@app/entity/answer/answer.entity';
 import { Survey } from '@app/entity/survey/survey.entity';
+import { Question } from '@app/entity/question/question.entity';
+import { Option } from '@app/entity/option/option.entity';
 
 @Injectable()
 export class SurveyService {
   constructor(
     @InjectRepository(Survey)
     private readonly surveyRepository: Repository<Survey>,
-    // private readonly questionService: QuestionService,
+    @InjectRepository(Question)
+    private readonly questionRepository: Repository<Question>,
+    @InjectRepository(Option)
+    private readonly optionRepository: Repository<Option>,
   ) {}
 
   async create(createSurveyInput: CreateSurveyInput) {
@@ -43,7 +48,8 @@ export class SurveyService {
     const find = await this.surveyRepository.findOneBy({ id });
     if (!find) throw new NotFoundException('Not exist survey id');
     await this.surveyRepository.softDelete(id);
-    // await this.questionService.removeBySurveyId(id); // survey 하위의 quetions 삭제
+    await this.questionRepository.softDelete({ survey: { id } });
+    await this.optionRepository.softDelete({ surveyId: id });
     return { id };
   }
 

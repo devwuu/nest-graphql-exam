@@ -54,14 +54,4 @@ export class OptionService {
     await this.optionRepository.softDelete(id);
     return { id };
   }
-
-  async removeBySurveyId(id: number) {
-    await this.optionRepository.softDelete({ surveyId: id });
-    return { id };
-  }
-
-  async removeByQuestionId(id: number) {
-    await this.optionRepository.softDelete({ question: { id } });
-    return { id };
-  }
 }

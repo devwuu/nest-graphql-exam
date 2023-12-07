@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Answer } from '@app/entity/answer/answer.entity';
 import { Question } from '@app/entity/question/question.entity';
 import { Survey } from '@app/entity/survey/survey.entity';
+import { Option } from '@app/entity/option/option.entity';
 
 @Injectable()
 export class QuestionService {
@@ -14,7 +15,8 @@ export class QuestionService {
     private readonly questionRepository: Repository<Question>,
     @InjectRepository(Survey)
     private readonly surveyRepository: Repository<Survey>,
-    // private readonly optionService: OptionService,
+    @InjectRepository(Option)
+    private readonly optionRepository: Repository<Option>,
   ) {}
 
   async create(createQuestionInput: CreateQuestionInput) {
@@ -48,13 +50,7 @@ export class QuestionService {
     const question = await this.questionRepository.findOneBy({ id });
     if (!question) throw new NotFoundException('Not exist question id');
     await this.questionRepository.softDelete(id);
-    // await this.optionService.removeByQuestionId(id);
-    return { id };
-  }
-
-  async removeBySurveyId(id: number) {
-    await this.questionRepository.softDelete({ survey: { id } });
-    // await this.optionService.removeBySurveyId(id); // question 하위의 options 삭제
+    await this.optionRepository.softDelete({ question: { id } });
     return { id };
   }
 
