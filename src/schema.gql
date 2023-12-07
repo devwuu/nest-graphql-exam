@@ -55,8 +55,8 @@ type Query {
   survey(id: Int!): Survey!
   question(id: Int!): Question!
   answer(id: Int!): Answer!
-  complete(surveyId: Int!, userId: Int!): AnsweredSurvey!
   option(id: Int!): Option!
+  complete(surveyId: Int!, userId: Int!): AnsweredSurvey!
 }
 
 type Mutation {

@@ -11,6 +11,7 @@ import { AnswerModule } from './answer/answer.module';
 import { OptionModule } from './option/option.module';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from '@app/shared/exception-filter/http-exception.filter';
+import { AnswerSurveyModule } from './answer-survey/answer-survey.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { HttpExceptionFilter } from '@app/shared/exception-filter/http-exception
     QuestionModule,
     AnswerModule,
     OptionModule,
+    AnswerSurveyModule,
   ],
   controllers: [GraphqlsController],
   providers: [
