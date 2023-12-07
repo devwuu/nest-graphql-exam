@@ -1,5 +1,5 @@
 ### 개발환경
-node version : v20.5.1
+node version : v20.5.1   
 npm version : 10.1.0
 
 ### 실행 방법
