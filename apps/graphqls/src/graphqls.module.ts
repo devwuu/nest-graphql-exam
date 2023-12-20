@@ -17,6 +17,7 @@ import { AnswerSurveyModule } from './answer-survey/answer-survey.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: ['.env.local', '.env.development'],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,

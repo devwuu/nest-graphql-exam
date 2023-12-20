@@ -2,29 +2,11 @@
 version: '3.1'
 
 services:
-  db:
-    container_name: db-pgsql
-    image: postgres
-    restart: always
-    hostname: db-pgsql
-    ports:
-      - ${POSTGRES_PORT}:5432
-    volumes:
-      - ./db_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    networks:
-      - basic
-
   application:
     container_name: graphql-app
     image: devwuu/basic:1.0
     ports:
       - 4000:4000
-    depends_on:
-      - db
     networks:
       - basic
 
