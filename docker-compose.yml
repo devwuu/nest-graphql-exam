@@ -2,13 +2,17 @@
 version: '3.1'
 
 services:
-  application:
-    container_name: graphql-app
-    image: devwuu/basic:1.0
+  db:
+    container_name: db-pgsql
+    image: postgres
+    restart: always
+    env_file:
+      - .env
     ports:
-      - 4000:4000
-    networks:
-      - basic
-
-networks:
-  basic: {}
+      - ${POSTGRES_PORT}:5432
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}

@@ -6,10 +6,10 @@ import {
   Logger,
   ValidationPipe,
 } from '@nestjs/common';
+import * as process from 'process';
 
 class Application {
   private readonly app: INestApplication;
-
   constructor(app: INestApplication) {
     this.app = app;
   }

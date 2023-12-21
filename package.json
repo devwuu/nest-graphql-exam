@@ -10,7 +10,7 @@
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
     "start:local": "nest start --watch",
-    "start:dev": "node dist/apps/graphqls/main.js",
+    "start:dev": "NODE_ENV=development node dist/apps/graphqls/main.js",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",

@@ -12,12 +12,15 @@ import { OptionModule } from './option/option.module';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from '@app/shared/exception-filter/http-exception.filter';
 import { AnswerSurveyModule } from './answer-survey/answer-survey.module';
+import * as process from 'process';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ['.env.local', '.env.development'],
+      envFilePath: process.env.NODE_ENV
+        ? `.env.${process.env.NODE_ENV}`
+        : '.env',
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,

@@ -22,6 +22,9 @@ const typeOrmOptions: TypeOrmModuleAsyncOptions = {
     entities: [Answer, Question, Survey, Option],
     synchronize: true, // // shouldn't be used in production
     logging: true,
+    ssl: {
+      rejectUnauthorized: false,
+    },
   }),
   inject: [ConfigService],
 };
