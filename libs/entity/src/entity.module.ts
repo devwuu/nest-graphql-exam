@@ -1,5 +1,9 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
+import {
+  TypeOrmModule,
+  TypeOrmModuleAsyncOptions,
+  TypeOrmModuleOptions,
+} from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Answer } from '@app/entity/answer/answer.entity';
 import { Option } from '@app/entity/option/option.entity';
@@ -12,21 +16,31 @@ import { AnswerModule } from './answer/answer.module';
 
 const typeOrmOptions: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
-  useFactory: (configService: ConfigService) => ({
-    type: 'postgres',
-    host: configService.get('POSTGRES_HOST'),
-    port: +configService.get('POSTGRES_PORT'),
-    username: configService.get('POSTGRES_USER'),
-    password: configService.get('POSTGRES_PASSWORD'),
-    database: configService.get('POSTGRES_DB'),
-    entities: [Answer, Question, Survey, Option],
-    synchronize: true, // // shouldn't be used in production
-    logging: true,
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  }),
   inject: [ConfigService],
+  useFactory: async (configService: ConfigService) => {
+    const option: TypeOrmModuleOptions = {
+      type: 'postgres',
+      host: configService.get('POSTGRES_HOST'),
+      port: +configService.get('POSTGRES_PORT'),
+      username: configService.get('POSTGRES_USER'),
+      password: configService.get('POSTGRES_PASSWORD'),
+      database: configService.get('POSTGRES_DB'),
+      entities: [Answer, Question, Survey, Option],
+      synchronize: true, // // shouldn't be used in production
+      logging: true,
+    };
+
+    if (configService.get('NODE_ENV')) {
+      return {
+        ...option,
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      };
+    }
+
+    return option;
+  },
 };
 
 @Module({
